@@ -83,6 +83,48 @@ const displayMovement = function (movements) {
 
 displayMovement(account1.movements);
 
+// COMPUTING USERNAME
+
+// const account2 = {
+//   owner: 'Jessica Davis',
+//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+//   interestRate: 1.5,
+//   pin: 2222,
+// };
+
+const createUserName = function (accs) {
+  accs.forEach(function (acc) {
+    accs.userName = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUserName(accounts);
+// console.log(accounts);
+
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce(function (
+    acc,
+    currentValue /*movement*/,
+    index,
+    array
+  ) {
+    return acc + currentValue;
+  },
+  0);
+
+  labelBalance.textContent = `${balance} EUROS`;
+};
+
+calcPrintBalance(account1.movements);
+
+// const user = 'Jessica Davis';
+
+// console.log(userName);
+
 const displayMovementFunction = function (movements) {
   containerMovements.innerHTML = '';
 
@@ -155,21 +197,21 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 for (const [i /*key*/, movement /*value*/] of movements.entries()) {
   if (movement > 0) {
-    console.log(`Movement ${i + 1}: You have deposited ${movement}`);
+    // console.log(`Movement ${i + 1}: You have deposited ${movement}`);
   } else {
-    console.log(`Movement ${i + 1}: You have withdrew ${Math.abs(movement)}`); //Math.abs() removes the negative sign
+    // console.log(`Movement ${i + 1}: You have withdrew ${Math.abs(movement)}`); //Math.abs() removes the negative sign
   }
 }
 
-console.log('.................for each loop....................');
+// console.log('.................for each loop....................');
 //FOR EACH LOOP
 
 movements.forEach(function (movement /*element*/, index, array) {
   if (movement > 0) {
-    console.log(`Movement ${index}: You have deposited ${movement}`);
+    // console.log(`Movement ${index}: You have deposited ${movement}`);
     // console.log(movement, index, array);
   } else {
-    console.log(`Movement ${index}: You have withdrew ${Math.abs(movement)}`); //Math.abs() removes the negative sign
+    // console.log(`Movement ${index}: You have withdrew ${Math.abs(movement)}`); //Math.abs() removes the negative sign
   }
 });
 
@@ -185,15 +227,15 @@ const currencies = new Map([
 ]);
 
 currencies.forEach(function (value, key, map) {
-  console.log(`${key}: ${value}`);
+  // console.log(`${key}: ${value}`);
 });
 
 //set
 const currenciesUnique = new Set(['USD', 'USD', 'EUR', 'GBP', 'GBP']);
-console.log(currenciesUnique);
+// console.log(currenciesUnique);
 
 currenciesUnique.forEach(function (value, key, set) {
-  console.log(`${key}: ${value}`);
+  // console.log(`${key}: ${value}`);
   //in sets the key is the same as the value because sets have no keys nor values
 });
 
@@ -220,6 +262,18 @@ const checkDogStatus = function (dogsJulia, dogsKate) {
 
 // checkDogStatus([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 
+dogs = [...dogsJuliaCorrected, ...dogsKate];
+
+const calcAverageHumanAge = function (dogs) {
+  const dogAgeInHumanYears = dogs.map(function (dogAge) {
+    if (dogAge <= 2) {
+      return dogAge * 2;
+    } else if (dogAge > 2) {
+      return 16 + dogAge * 4;
+    }
+  });
+};
+
 //MAP METHOD
 // movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -229,15 +283,15 @@ const movementsUSD = movements.map(function (movement) {
   return movement * euroToUSD;
 });
 
-console.log(movements);
-console.log(movementsUSD);
+// console.log(movements);
+// console.log(movementsUSD);
 
 const movementsUsdFor = [];
 for (const movement of movements) {
   movementsUsdFor.push(movement * euroToUSD);
 }
 // console.log('here');
-console.log(movementsUsdFor);
+// console.log(movementsUsdFor);
 
 // const isma = [2, 4, 6, 8, 1, 9];
 
@@ -246,3 +300,53 @@ console.log(movementsUsdFor);
 // });
 
 // console.log(ismaModified);
+
+const movementDescription = movements.map(
+  (movement, index) =>
+    `movement ${index + 1}: You ${
+      movement > 0 ? 'deposited' : 'withdrew'
+    } ${Math.abs(movement)}`
+);
+
+// console.log(movementDescription);
+
+const deposits = movements.filter(function (movement) {
+  return movement > 0;
+});
+
+// console.log(deposits);
+
+const withdrawals = movements.filter(function (movement) {
+  return movement < 0;
+});
+
+// console.log(withdrawals);
+
+const balance = movements.reduce(function (acc, currentValue, index, arr) {
+  // console.log(`iteration ${index}: ${acc}`);
+  return acc + currentValue;
+}, 0);
+
+// console.log(balance);
+
+const max = movements.reduce(function (acc, movement, index, array) {
+  if (acc > movement) {
+    return acc;
+  } else {
+    return movement;
+  }
+}, movements[0]);
+
+// console.log(max);
+
+const min = movements.reduce(function (acc, movement, index, array) {
+  if (acc < movement) {
+    // console.log(acc);
+    return acc;
+  } else {
+    return movement;
+  }
+}, movements[0]);
+// console.log(min);
+
+//3, 5, 2, 12, 7] , [4, 1, 15, 8, 3]

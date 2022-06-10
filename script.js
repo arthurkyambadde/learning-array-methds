@@ -260,19 +260,32 @@ const checkDogStatus = function (dogsJulia, dogsKate) {
   });
 };
 
-// checkDogStatus([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-
-dogs = [...dogsJuliaCorrected, ...dogsKate];
+const dogs = [...[3, 5, 2, 12, 7], ...[4, 1, 15, 8, 3]];
 
 const calcAverageHumanAge = function (dogs) {
   const dogAgeInHumanYears = dogs.map(function (dogAge) {
     if (dogAge <= 2) {
+      console.log(dogAge);
       return dogAge * 2;
     } else if (dogAge > 2) {
+      console.log(dogAge);
       return 16 + dogAge * 4;
     }
   });
+  console.log(dogAgeInHumanYears);
+
+  const filteredDOgs = dogAgeInHumanYears.filter(humanDog => humanDog >= 18);
+  console.log(filteredDOgs);
+
+  const averageHumanAge =
+    filteredDOgs.reduce(
+      (accumulator, filteredDOg) => accumulator + filteredDOg,
+      0
+    ) / filteredDOgs.length;
+  return averageHumanAge;
 };
+
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 
 //MAP METHOD
 // movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -350,3 +363,10 @@ const min = movements.reduce(function (acc, movement, index, array) {
 // console.log(min);
 
 //3, 5, 2, 12, 7] , [4, 1, 15, 8, 3]
+
+const totalDepositesUSD = movements
+  .filter(movement => movement > 0)
+  .map(movement => movement * euroToUSD)
+  .reduce((accumulator, movement) => accumulator + movement, 0);
+
+console.log(totalDepositesUSD);

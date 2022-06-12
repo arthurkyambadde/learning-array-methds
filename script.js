@@ -514,7 +514,7 @@ const account = accounts.find(account => account.owner === 'Sarah Smith');
 
 // console.log(account);
 
-console.log(movements.includes(-130));
+// console.log(movements.includes(-130));
 
 //SOME METHOD
 //checks wether some items satisfy the condition
@@ -524,4 +524,100 @@ console.log(anyDeposit);
 //EVERY METHOD
 //chexks whether all items satisfy the condition
 const checkMe = movements.every(movement => movement > 0);
-console.log(checkMe);
+// console.log(checkMe);
+
+//FLAT METHOD
+
+const arry = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
+
+console.log(arry.flat());
+
+const arry2 = [
+  [
+    [1, 2, 3],
+    [4, [5, 6]],
+  ],
+  7,
+  8,
+  9,
+];
+
+// console.log(arry2.flat());
+// console.log(arry2.flat(2));
+// console.log(arry2.flat(3));
+
+const AccountMovements = accounts.map(account => account.movements);
+
+// console.log(AccountMovements);
+
+const allAccountMovements = AccountMovements.flat();
+// console.log(allAccountMovements);
+
+const bankbalance = allAccountMovements.reduce(
+  (accumulator, movement) => accumulator + movement,
+  0
+);
+
+// console.log(bankbalance);
+
+const chainBankBalance = accounts
+  .map(account => account.movements)
+  .flat()
+  .reduce((accumulator, movement) => accumulator + movement, 0);
+
+// console.log(chainBankBalance);
+
+//FLATMAP METHOD
+
+const usingFlatMap = accounts
+  .flatMap(account => account.movements)
+  .reduce((accumulator, movement) => accumulator + movement, 0);
+
+// console.log(usingFlatMap);
+
+// const owner = accounts.map(account => account.owner);
+
+// console.log(owner);
+
+//SORT METHOD arranges alphabetically
+//it mutates the original array
+
+const owner = ['zanzibar', 'through', 'pass', 'arthur'];
+
+// console.log(owner.sort());
+// console.log(owner);
+
+// const numbersToSort = movements;
+// console.log(numbersToSort);
+// console.log(numbersToSort.sort());
+
+//FILL METHOD
+
+const x = new Array(7);
+// console.log(x);
+//this generates an array of length 7 but empty
+
+x.fill(1);
+// console.log(x);
+//this fiils the empty array with 1s in all empty positions
+
+x.fill(1, 3);
+//fills the array begining at position 3
+
+const arrey = [1, 2, 3, 4, 5, 6, 7, 8];
+
+//Array.from()
+const diceRolls = Array.from({ length: 100 }, () =>
+  Math.trunc(Math.random() * 6)
+);
+// console.log(diceRolls);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value')
+  );
+
+  console.log(
+    movementsUI.map(element => Number(element.textContent.replace('EUROS', '')))
+  );
+});
